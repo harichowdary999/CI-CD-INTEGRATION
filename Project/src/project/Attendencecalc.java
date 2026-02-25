@@ -15,9 +15,10 @@ public class Attendencecalc {
         } else {
             System.out.println("Your attendance is too low. You are not allowed to sit in the exam.");
         }
-        sc.close();
+        sc.close(); //Akash
     }
 }
+
 
 
 
