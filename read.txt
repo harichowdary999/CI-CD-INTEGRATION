@@ -1,0 +1,182 @@
+# LAB SHEET 6 — GitHub Actions CI Pipeline
+
+## Aim
+
+To automate Java compilation and execution using GitHub Actions.
+
+---
+
+## Requirements
+
+* GitHub account
+* Git installed
+* Java program
+* GitHub repository
+
+---
+
+## Step 1
+
+Create new GitHub repository.
+
+Do not add README file.
+
+---
+
+## Step 2
+
+Create Java file:
+
+```java id="k7m2pk"
+class Add{
+    public static void main(String args[]){
+        int a = 10;
+        int b = 20;
+
+        System.out.println("Sum = " + (a+b));
+    }
+}
+```
+
+Save as:
+
+```text id="x1q8tv"
+Add.java
+```
+
+---
+
+## Step 3
+
+Push code into GitHub repository.
+
+Open Git Bash:
+
+```bash id="m4v7qc"
+git init
+```
+
+```bash id="r9k0nx"
+git add .
+```
+
+```bash id="u2w5ry"
+git commit -m "Java Program"
+```
+
+```bash id="p5m1hc"
+git branch -M main
+```
+
+```bash id="t8q4pl"
+git remote add origin <repo-url>
+```
+
+```bash id="c3x7nw"
+git push -u origin main
+```
+
+---
+
+## Step 4
+
+Create folders:
+
+```text id="y6k0tv"
+.github/workflows
+```
+
+---
+
+## Step 5
+
+Create file:
+
+```text id="f9m3qx"
+main.yml
+```
+
+Path:
+
+```text id="j2t6rv"
+.github/workflows/main.yml
+```
+
+---
+
+## Step 6
+
+Paste YAML workflow:
+
+```yaml id="n5q9pk"
+name: Java CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Compile Java
+      run: javac *.java
+
+    - name: Run Java Program
+      run: java Add
+```
+
+Commit changes.
+
+---
+
+## Step 7
+
+Open GitHub repository.
+
+Click:
+
+```text id="u8m2tv"
+Actions
+```
+
+tab.
+
+Workflow starts automatically.
+
+---
+
+## Step 8
+
+Open workflow build.
+
+Check output logs.
+
+---
+
+## Output
+
+* Workflow executed successfully.
+* Java program compiled successfully.
+* Output displayed:
+
+```text id="r1w6ny"
+Sum = 30
+```
+
+---
+
+## Theory / Conclusion
+
+GitHub Actions is used for Continuous Integration and Continuous Deployment (CI/CD). YAML workflow file automates compilation and execution whenever code is pushed into GitHub repository.
